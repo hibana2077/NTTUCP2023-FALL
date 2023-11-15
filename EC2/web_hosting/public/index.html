@@ -2,7 +2,7 @@
  * @Author: hibana2077 hibana2077@gmaill.com
  * @Date: 2023-11-14 12:34:58
  * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2023-11-14 13:30:49
+ * @LastEditTime: 2023-11-15 15:20:36
  * @FilePath: /NTTUCP2023-FALL/EC2/web_hosting/public/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * https://www.kx.com.tw/aws-usecase-VPC/
@@ -55,6 +55,9 @@
 
                 <!-- 圖像內容 -->
                 <img v-else-if="content.method === 'image'" :src="content.link" class="w-full h-auto" />
+
+                <!-- 音樂內容 -->
+                <iframe style="border-radius:12px" :src="content.link" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
 
         </div>
@@ -66,9 +69,9 @@
                 data() {
                     return {
                         message: '歡迎來到 Vue + Tailwind 的世界！',
-                        placeholderCards: [{ id: 1 }, { id: 2 }, { id: 3 }], // 占位符卡片的數據
-                        placeholderCards_header: [{ id: "video" }, { id: "text" }, { id: "image" }],
-                        placeholderCards_content: [{ method: "video", link: "https://www.youtube.com/embed/d_zXU8JN-u8?si=XkzwOWJIk2MhZ7v8" }, { method: "text", content: "這是一段文字" }, { method: "image", link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbL92vhalPuPnr8L491IICwL1tOsVX3wA1OqBoFL8&s" }]
+                        placeholderCards: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }], // 占位符卡片的數據
+                        placeholderCards_header: [{ id: "video" }, { id: "text" }, { id: "image" }, { id: "music" }],
+                        placeholderCards_content: [{ method: "video", link: "https://www.youtube.com/embed/d_zXU8JN-u8?si=XkzwOWJIk2MhZ7v8" }, { method: "text", content: "11011240 李軒豪 資工三乙" }, { method: "image", link: "./desktop.png" }, { method: "music", link: "https://open.spotify.com/embed/track/2LtMq5ELlpRgzP4JSxMGmn?utm_source=generator" }]
                     }
                 },
                 methods: {
