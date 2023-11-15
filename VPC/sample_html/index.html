@@ -1,26 +1,86 @@
 <!--
  * @Author: hibana2077 hibana2077@gmaill.com
- * @Date: 2023-11-08 04:16:36
+ * @Date: 2023-11-14 12:34:58
  * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2023-11-15 15:50:21
- * @FilePath: /NTTUCP2023-FALL/VPC/sample_html/index.html
+ * @LastEditTime: 2023-11-15 16:06:07
+ * @FilePath: /NTTUCP2023-FALL/EC2/web_hosting/public/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * https://www.kx.com.tw/aws-usecase-VPC/
 -->
-<html>
-  <head>
-    <title>雲端期中考</title>
-  </head>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>雲端期中考第四題</title>
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            /* 添加自定義樣式 */
+            .gradient-bg {
+                background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+            }
+            .glass-card {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border-radius: 12px;
+                padding: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+        </style>
+    </head>
+    <body class="gradient-bg min-h-screen flex flex-col items-center justify-center space-y-4">
+        <div id="app" class="w-full max-w-md">
+            <!-- 主要的卡片 -->
+            <div class="glass-card text-center p-4 mb-4">
+                <h1 class="text-3xl font-bold underline mb-4">
+                    {{ message }}
+                </h1>
+                <button @click="reverseMessage" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    顛倒信息
+                </button>
+            </div>
+    
+            <!-- 占位符卡片 -->
+            <div v-for="(content, index) in placeholderCards_content" :key="placeholderCards[index].id" class="glass-card h-auto padding-4 mb-4">
+                <!-- 影片內容 -->
+                <div v-if="content.method === 'video'">
+                    <iframe width="400" height="315" :src=content.link title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
 
-  <body>
-    <h1>112-1 雲端運算期中考</h1>
+                <!-- 文本內容 -->
+                <p v-else-if="content.method === 'text'" class="text-center">
+                    {{ content.content }}
+                </p>
 
-    <p>!!! 簽到 !!!</p>
-    <p>班級: </p>
-    <p>學號: </p>
-    <p>姓名: </p>
+                <!-- 圖像內容 -->
+                <img v-else-if="content.method === 'image'" :src="content.link" class="w-full h-auto" />
 
-    <img src="./desktop.png" style="width: 100%; border-radius: 12px" />
+                <!-- 音樂內容 -->
+                <iframe style="border-radius:12px" :src="content.link" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
 
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3vbAxBj6QCme8Jdzem59IF?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  </body>
-</html>
+        </div>
+    
+        <!-- Vue.js -->
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script>
+            Vue.createApp({
+                data() {
+                    return {
+                        message: '雲端期中考第四題',
+                        placeholderCards: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }], // 占位符卡片的數據
+                        placeholderCards_header: [{ id: "video" }, { id: "text" }, { id: "image" }, { id: "music" }],
+                        placeholderCards_content: [{ method: "video", link: "https://www.youtube.com/embed/d_zXU8JN-u8?si=XkzwOWJIk2MhZ7v8" }, { method: "text", content: "11011240 李軒豪 資工三乙" }, { method: "image", link: "./desktop.png" }, { method: "music", link: "https://open.spotify.com/embed/track/3vbAxBj6QCme8Jdzem59IF?utm_source=generator" }]
+                    }
+                },
+                methods: {
+                    reverseMessage() {
+                        this.message = this.message.split('').reverse().join('')
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </body>
+    </html>
+    
